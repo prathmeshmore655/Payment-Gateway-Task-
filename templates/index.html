@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Book - Razorpay Payment</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+
+    {% csrf_token %}
+    <div class="container mt-5">
+        <h1 class="text-center">Book Store</h1>
+        <div class="row justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <img src="data:image/jpeg;base64,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" class="card-img-top" alt="Book Image">
+                <div class="card-body">
+                    <h5 class="card-title"> Book</h5>
+                    <p class="card-text">Price: 500</p>
+
+                 
+
+                    <button id="rzp-button1" class="btn btn-primary w-100">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('rzp-button1').addEventListener('click', function (e) {
+            e.preventDefault();
+
+
+           
+            const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+            fetch('/create-order/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "X-CSRFToken": csrfToken,
+                },
+                body: JSON.stringify({ book: 'Book', 'price': 500 })
+            })
+            .then(response => response.json())
+            .then(order => {
+
+
+
+                var options = {
+                    "key": "rzp_test_IqKtLm7kL4ndbw",
+                    "amount": order.amount, 
+                    "currency": order.currency,
+                    "name": "Admin",
+                    "description": "Payment for 'The Great Book'",
+                    "order_id": order.id,
+                    "handler": function (response) {
+                        alert("Payment Successful!");
+                        console.log("Payment ID:", response.razorpay_payment_id);
+                        console.log("Order ID:", response.razorpay_order_id);
+                        console.log("Signature:", response.razorpay_signature);
+                    },
+                    "prefill": {
+                        "name": "John Doe",
+                        "email": "john.doe@example.com",
+                        "contact": "9000090000"
+                    },
+                    "theme": {
+                        "color": "#3399cc"
+                    }
+                };
+
+                var rzp1 = new Razorpay(options);
+
+                rzp1.on('payment.failed', function (response) {
+                    alert("Payment Failed!");
+                    console.error("Error Code:", response.error.code);
+                    console.error("Error Description:", response.error.description);
+                    console.error("Error Source:", response.error.source);
+                    console.error("Error Step:", response.error.step);
+                    console.error("Error Reason:", response.error.reason);
+                    console.error("Order ID:", response.error.metadata.order_id);
+                    console.error("Payment ID:", response.error.metadata.payment_id);
+                });
+
+                rzp1.open();
+            })
+            .catch(error => {
+                console.error("Error Fetching Order:", error);
+                alert("Failed to create Razorpay order. Please try again.");
+            });
+        });
+    </script>
+</body>
+</html>
